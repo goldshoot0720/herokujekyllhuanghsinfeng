@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.6",
+    "bootstrap": "^5.3.7",
     "simple-jekyll-search": "^1.10.0"
   },
   "devDependencies": {
