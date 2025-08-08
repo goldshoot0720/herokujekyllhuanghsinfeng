@@ -1,0 +1,5 @@
+---
+layout: json
+permalink: /site.json
+---
+{{ site | jsonify }}
