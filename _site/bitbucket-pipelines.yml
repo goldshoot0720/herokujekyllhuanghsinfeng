@@ -1,0 +1,24 @@
+image: ruby:3.1
+
+pipelines:
+  default:
+    - step:
+        name: Build and Deploy Jekyll
+        script:
+          - apt-get update && apt-get install -y git openssh-client
+          # 安装 Jekyll
+          - gem install bundler jekyll
+          - bundle install
+          - jekyll build
+          # 配置 Git 用户
+          - git config --global user.email "hsinfenghuang@icloud.com"
+          - git config --global user.name "hsinfenghuang"
+          # 克隆 gh-pages 仓库（这里直接用 Pipelines 自带的 SSH key）
+          - git clone git@bitbucket.org:huanghsinfeng/huanghsinfeng.bitbucket.io.git deploy
+          - cd deploy
+          - git checkout main || git checkout -b main
+          - rm -rf *
+          - cp -r ../_site/* .
+          - git add .
+          - git commit -m "Auto-deploy site at $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          - git push origin main
