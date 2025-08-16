@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Gemfile",
+      "use": "@vercel/ruby",
+      "config": {
+        "bundlerVersion": "2.7.1"
+      }
+    },
+    {
+      "src": "jekyll.config",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "_site",
+        "buildCommand": "gem install bundler -v 2.7.1 && bundle _2.7.1_ install --deployment && bundle exec jekyll build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "build": {
+    "env": {
+      "JEKYLL_ENV": "production"
+    }
+  }
+}

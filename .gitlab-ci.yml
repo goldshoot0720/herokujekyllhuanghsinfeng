@@ -1,0 +1,26 @@
+image: ruby:3.1
+
+before_script:
+  - gem install bundler
+  - bundle install
+
+build:
+  stage: build
+  script:
+    - bundle exec jekyll build -d public 
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  only:
+    - main  
+

@@ -1,0 +1,15 @@
+app = 'herokujekyllhuanghsinfeng'
+primary_region = 'hkg'
+
+[env]
+  PORT = '8080'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
